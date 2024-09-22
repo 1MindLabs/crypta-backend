@@ -10,11 +10,11 @@ from network import scan_network
 # Initialize colorama for colored output in console
 init(autoreset=True)
 
-with open('metadata/schema.json', 'r') as file:
+with open('app/metadata/schema.json', 'r') as file:
     metadata = json.load(file)
     file_types = metadata['file_types']
 
-def scan_path(input_path, rules_path='yara-rules/security.yara'):
+def scan_path(input_path, rules_path='yara-rules/security.yar'):
     # Check if input path is a directory, zip file, or single file
     if os.path.isdir(input_path):
         process_directory(input_path, rules_path)

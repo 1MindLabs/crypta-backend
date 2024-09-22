@@ -21,10 +21,14 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=['*'],
-    allow_credentials=True,
     allow_methods=['*'],
-    allow_headers=['*']
+    allow_headers=['*'],
+    allow_credentials=True
 )
+
+@app.get('/')
+async def root():
+    return JSONResponse(content={'message': 'Backend server is running.'})
 
 @app.post('/api/analyze')
 async def analyze(uploadedFiles: list[UploadFile] = File(...), yaraFile: UploadFile = File(...)):
@@ -171,11 +175,6 @@ async def chat(request: Request):
     # Get the response from the Gemini model
     bot_response = predict(user_message, 'Chat')
     return JSONResponse(content={'response': bot_response})
-
-@app.get('/')
-async def index():
-    return JSONResponse(content={'message': 'Welcome to the API!'})
-
 
 if __name__ == '__main__':
     uvicorn.run('run:app', host='0.0.0.0', port=8000, reload=True)

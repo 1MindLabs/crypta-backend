@@ -5,7 +5,7 @@ import json
 import yara
 from datetime import datetime
 
-with open('metadata/schema.json', 'r') as file:
+with open('app/metadata/schema.json', 'r') as file:
     metadata = json.load(file)
 
 class EwfImage(pytsk3.Img_Info):

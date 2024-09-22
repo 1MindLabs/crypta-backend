@@ -7,7 +7,7 @@ from colorama import init, Fore, Style
 # Initialize colorama for colored output in console
 init(autoreset=True)
 
-with open('metadata/schema.json', 'r') as file:
+with open('app/metadata/schema.json', 'r') as file:
     metadata = json.load(file)
 
 def scan_drive():

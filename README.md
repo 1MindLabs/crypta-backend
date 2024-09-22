@@ -2,12 +2,6 @@
   <img src="assets/logo-transparent.png" alt="Project Logo">
 </p>
 
-## Project Archived
-
-This repository has been archived and is no longer actively maintained here. The project has been split and is now maintained under the [1Mind Labs](https://github.com/1MindLabs) organization.
-
-For the latest updates and continued development, please visit the respective repositories within the 1Mind Labs organization.
-
 ## Project Description
 
 An automated digital forensics and incident response system designed for anomaly detection and pattern recognition across system data and network activity. The tool integrates AI/ML models to classify system risk levels, identify indicators of compromise (IoCs), and generate actionable insights from forensic disk images, memory dumps, and network traffic.
@@ -73,23 +67,23 @@ Additionally, the tool supports live drive detection, allowing investigators to 
 
 ---
 
-1. **[Log Files](https://github.com/areebahmeddd/Crypta/blob/main/app/file.py)**: Uses the `yara-python` library to automate YARA rule-based file classification, scanning log files for malicious patterns and indicators of compromise.
+1. **[Log Files](https://github.com/1MindLabs/crypta-backend/blob/main/app/file.py)**: Uses the `yara-python` library to automate YARA rule-based file classification, scanning log files for malicious patterns and indicators of compromise.
 
-2. **[Network Captures](https://github.com/areebahmeddd/Crypta/blob/main/app/network.py)**: Utilizes the `Scapy` library to automate network traffic analysis, replacing manual tasks typically handled by Wireshark. It looks for specific packets such as HTTP Requests, DNS Queries, and IP Packets to identify anomalies in packet captures.
+2. **[Network Captures](https://github.com/1MindLabs/crypta-backend/blob/main/app/network.py)**: Utilizes the `Scapy` library to automate network traffic analysis, replacing manual tasks typically handled by Wireshark. It looks for specific packets such as HTTP Requests, DNS Queries, and IP Packets to identify anomalies in packet captures.
 
-3. **[Registry Hives](https://github.com/areebahmeddd/Crypta/blob/main/app/registry.py)**: Employs the `Regipy` library to automate the tasks of Regripper, extracting and analyzing Windows registry hives for forensic investigation of system activity.
+3. **[Registry Hives](https://github.com/1MindLabs/crypta-backend/blob/main/app/registry.py)**: Employs the `Regipy` library to automate the tasks of Regripper, extracting and analyzing Windows registry hives for forensic investigation of system activity.
 
-4. **[Running Processes](https://github.com/areebahmeddd/Crypta/blob/main/app/process.py)**: Leverages `PSUtil` to automate the functionalities of Sysinternals Suite, monitoring and collecting data on running processes, system performance, and resource usage.
+4. **[Running Processes](https://github.com/1MindLabs/crypta-backend/blob/main/app/process.py)**: Leverages `PSUtil` to automate the functionalities of Sysinternals Suite, monitoring and collecting data on running processes, system performance, and resource usage.
 
-5. **[FastAPI](https://github.com/areebahmeddd/Crypta/blob/main/app/run.py)**: Acts as the core backend framework, handling data ingestion, analysis requests, and communication between the various forensic modules and front-end interfaces, ensuring efficient processing.
+5. **[FastAPI](https://github.com/1MindLabs/crypta-backend/blob/main/app/run.py)**: Acts as the core backend framework, handling data ingestion, analysis requests, and communication between the various forensic modules and front-end interfaces, ensuring efficient processing.
 
-6. **[Google Gemini](https://github.com/areebahmeddd/Crypta/blob/main/app/gemini.py)**: Integrates with the system to analyze processed file data using a prompt, generating detailed summaries of findings through `ReportLab`, which are then exported in report formats (PDF, CSV, and JSON).
+6. **[Google Gemini](https://github.com/1MindLabs/crypta-backend/blob/main/app/gemini.py)**: Integrates with the system to analyze processed file data using a prompt, generating detailed summaries of findings through `ReportLab`, which are then exported in report formats (PDF, CSV, and JSON).
 
-7. **[TensorFlow AI/ML Model](https://github.com/areebahmeddd/Crypta/tree/main/app/models)**: Trained to detect anomalies, classify risks, and recognize patterns within the ingested forensic data, supporting advanced automated analysis and decision-making.
+7. **[TensorFlow AI/ML Model](https://github.com/1MindLabs/crypta-backend/tree/main/app/models)**: Trained to detect anomalies, classify risks, and recognize patterns within the ingested forensic data, supporting advanced automated analysis and decision-making.
 
-8. **[Web App](https://github.com/areebahmeddd/Crypta/tree/main/web-app)**: Allows users to input various forensic artifacts such as regular files, folders, memory dumps, or disk images. It provides a real-time interface for investigators to interact with the analysis engine.
+8. **[Web App](https://github.com/1MindLabs/crypta-web-app)**: Allows users to input various forensic artifacts such as regular files, folders, memory dumps, or disk images. It provides a real-time interface for investigators to interact with the analysis engine.
 
-9. **[Desktop App](https://github.com/areebahmeddd/Crypta/tree/main/desktop-app)**: Provides cross-platform compatibility with enhanced security features compared to web browsers, enabling secure input and analysis of forensic data with better local system access.
+9. **[Desktop App](https://github.com/1MindLabs/crypta-desktop-app)**: Provides cross-platform compatibility with enhanced security features compared to web browsers, enabling secure input and analysis of forensic data with better local system access.
 
 ## ML Model Design
 

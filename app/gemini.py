@@ -15,7 +15,7 @@ if gemini_api_key:
     print(f'GEMINI_API_KEY is set: {gemini_api_key}')
 else:
     print('GEMINI_API_KEY is not set')
-    
+
 genai.configure(api_key=gemini_api_key)
 
 # Generation settings to control the model's output
@@ -36,7 +36,7 @@ safety_settings = [
 ]
 
 # Load the instructions for the model
-with open('metadata/instruction.md', 'r') as file:
+with open('app/metadata/instruction.md', 'r') as file:
     gemini_instructions = file.read()
 
 # Initialize the Gemini model with custom settings and instructions
