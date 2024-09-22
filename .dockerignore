@@ -1,0 +1,28 @@
+# Python related
+.venv/
+__pycache__/
+.env
+.github/
+
+# Test files
+*.e01
+*.raw
+*.mem
+
+# Output related
+*.pdf
+*.docx
+temp/
+
+# Static files
+assets/
+logs/
+yara-rules/
+
+# Project-specific files
+.gitignore
+LICENSE
+README.md
+
+# Docker-specific files
+Dockerfile
