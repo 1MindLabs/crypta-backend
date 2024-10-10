@@ -41,4 +41,5 @@ def process_results(file_data, yara_rules):
             yara_results.append({'triggered_action': match.rule})
     else:
         yara_results.append({'triggered_action': 'No YARA rules matched'})
+
     return yara_results

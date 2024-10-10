@@ -1,5 +1,6 @@
 import uvicorn
 import os
+import shutil
 from fastapi import FastAPI, Request, UploadFile, File, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, FileResponse
@@ -11,7 +12,7 @@ from network import scan_network
 # from registry import scan_registry
 # from process import scan_process
 from drive import scan_drive
-from gemini import predict, summarize
+from gemini import predict_risk, summarize
 
 from models.risk.risk_level import predict_level
 from models.risk.risk_type import predict_type
@@ -28,6 +29,7 @@ app.add_middleware(
 
 @app.get('/')
 async def root():
+    # Health check endpoint to verify the server is running
     return JSONResponse(content={'message': 'Backend server is running.'})
 
 @app.post('/api/analyze')
@@ -117,10 +119,12 @@ async def analyze(uploadedFiles: list[UploadFile] = File(...), yaraFile: UploadF
 
         return JSONResponse(content={
             'results': scan_results,
-            'gemini': predict(scan_results, 'Analyze')
+            'gemini': predict_risk(scan_results, 'Analyze')
         })
     except Exception as e:
         return JSONResponse(content={'error': str(e)})
+    finally:
+        shutil.rmtree(TEMP_DIR)
 
 @app.post('/api/detect')
 async def detect(background_tasks: BackgroundTasks):
@@ -173,7 +177,7 @@ async def chat(request: Request):
     user_message = request_data.get('message')
 
     # Get the response from the Gemini model
-    bot_response = predict(user_message, 'Chat')
+    bot_response = predict_risk(user_message, 'Chat')
     return JSONResponse(content={'response': bot_response})
 
 if __name__ == '__main__':

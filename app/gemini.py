@@ -14,7 +14,7 @@ gemini_api_key = os.getenv('GEMINI_API_KEY')
 if gemini_api_key:
     print(f'GEMINI_API_KEY is set: {gemini_api_key}')
 else:
-    print('GEMINI_API_KEY is not set')
+    print('GEMINI_API_KEY is not set.')
 
 genai.configure(api_key=gemini_api_key)
 
@@ -50,7 +50,7 @@ llm = GenerativeModel(
 # Start a chat session with the model
 chat_session = llm.start_chat(history=[])
 
-def predict(file_data, prompt):
+def predict_risk(file_data, prompt):
     # Send the file data to the model for analysis (Prompt: Analyse)
     user_message = f'Prompt: {prompt}\n{file_data}'
     print('Sending data to Gemini')

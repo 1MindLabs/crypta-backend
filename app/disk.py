@@ -51,7 +51,6 @@ def scan_disk(image_path, rules_path):
 
         print(f'No supported filesystem found in disk image {image_path}')
         ewf_handle.close()
-
     except Exception as e:
         print(f'Error processing disk image {image_path}: {e}')
 
