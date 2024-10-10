@@ -4,16 +4,18 @@
 
 ## Project Description
 
-An automated digital forensics and incident response system designed for anomaly detection and pattern recognition across system data and network activity. The tool integrates AI/ML models to classify system risk levels, identify indicators of compromise (IoCs), and generate actionable insights from forensic disk images, memory dumps, and network traffic.
+An automated digital forensics and incident response (DFIR) system designed for anomaly detection and pattern recognition across system data and network activity. The tool integrates AI/ML models to classify system risk levels, types, identify indicators of compromise (IoCs), and generate actionable insights from forensic disk images, memory dumps, and network traffic. 
 
-**Built for** [Smart India Hackathon - 2024](https://sih.gov.in)
+Furthermore, it utilizes blockchain technology for secure, immutable audit trails, enhancing data integrity and supporting faster decision-making and response times after an attack.
+
+**Built for** [Smart India Hackathon - 2024](https://sih.gov.in) (SIH1744)
 
 ### Key Features
 
 - **Automated Forensic Data Collection**: Automates FTK Imager, Volatility, RegRipper, and Sysinternals Suite through Python libraries (PyEWF, MemProcFS, Regipy, and PSUtil) for forensic images, memory dumps, registry hives, and background processes.
 - **IoC Identification**: Utilizes custom YARA rules and MISP databases for detecting file anomalies and correlating known IoCs.
 - **Network Traffic Analysis**: Leverages Wireshark and Scapy to analyze packet captures and identify suspicious network activities.
-- **AI/ML Integration**: Implements TensorFlow models for anomaly detection and risk classification, offering investigators prioritized analysis of critical artifacts.
+- **AI/ML Integration**: Implements TensorFlow models (RNN) for anomaly detection and risk classification, offering investigators prioritized analysis of critical artifacts.
 - **Cross-Platform Dashboards**: Provides real-time data visualization, interactive timelines, and detailed reports with export options in PDF, JSON, and CSV formats.
 - **Scalable Architecture**: Built with FastAPI, Next.js, and Flutter, ensuring high performance and easy deployment across environments.
 
@@ -50,7 +52,6 @@ Additionally, the tool supports live drive detection, allowing investigators to 
 ### Other:
 
 - [ ] Support desktop app download
-- [ ] Implement responsive web design
 - [ ] Improve loading animations
 - [ ] Add chatbot functionality and background image
 
@@ -73,13 +74,13 @@ Additionally, the tool supports live drive detection, allowing investigators to 
 
 3. **[Registry Hives](https://github.com/1MindLabs/crypta-backend/blob/main/app/registry.py)**: Employs the `Regipy` library to automate the tasks of Regripper, extracting and analyzing Windows registry hives for forensic investigation of system activity.
 
-4. **[Running Processes](https://github.com/1MindLabs/crypta-backend/blob/main/app/process.py)**: Leverages `PSUtil` to automate the functionalities of Sysinternals Suite, monitoring and collecting data on running processes, system performance, and resource usage.
+4. **[Running Processes](https://github.com/1MindLabs/crypta-backend/blob/main/app/process.py)**: Leverages `PSUtil` library to automate the functionalities of Sysinternals Suite, monitoring and collecting data on running processes, system performance, and resource usage.
 
 5. **[FastAPI](https://github.com/1MindLabs/crypta-backend/blob/main/app/run.py)**: Acts as the core backend framework, handling data ingestion, analysis requests, and communication between the various forensic modules and front-end interfaces, ensuring efficient processing.
 
-6. **[Google Gemini](https://github.com/1MindLabs/crypta-backend/blob/main/app/gemini.py)**: Integrates with the system to analyze processed file data using a prompt, generating detailed summaries of findings through `ReportLab`, which are then exported in report formats (PDF, CSV, and JSON).
+6. **[Google Gemini](https://github.com/1MindLabs/crypta-backend/blob/main/app/gemini.py)**: Integrates with the system to analyze processed file data using a prompt, generating detailed summaries of findings through `ReportLab` library, which are then exported in report formats (PDF, CSV, and JSON).
 
-7. **[TensorFlow AI/ML Model](https://github.com/1MindLabs/crypta-backend/tree/main/app/models)**: Trained to detect anomalies, classify risks, and recognize patterns within the ingested forensic data, supporting advanced automated analysis and decision-making.
+7. **[TensorFlow AI/ML Model](https://github.com/1MindLabs/crypta-backend/tree/main/app/models)**: Trained LSTM model to detect anomalies, classify risks, and recognize patterns within the ingested forensic data, supporting advanced automated analysis and decision-making.
 
 8. **[Web App](https://github.com/1MindLabs/crypta-web-app)**: Allows users to input various forensic artifacts such as regular files, folders, memory dumps, or disk images. It provides a real-time interface for investigators to interact with the analysis engine.
 
@@ -87,34 +88,34 @@ Additionally, the tool supports live drive detection, allowing investigators to 
 
 ## ML Model Design
 
-1. **Network Traffic Classification Model**:
-   - We utilized a pre-trained XGBoost classifier from `scikit-learn` to evaluate network traffic patterns.
-   - The model was optimized for multiclass classification using log loss as the evaluation metric.
-   - Model performance indicates no signs of overfitting, as the training and validation results are closely aligned. (Shown in Graph 1)
-   - Achieved 98% accuracy on both the training set and the new test [dataset](https://kaggle.com/datasets/tarundhamor/cicids-2019-dataset), ensuring robust generalization.
-
-<p align="center">
-  <img src="assets/ai/network.jpg" alt="Network Graph 1">
-  <br>
-  XGBoost Multiclass Log Loss stabilizes over boosting rounds for training and validation datasets (Graph 1)
-</p>
-
-2. **Risk Level and Type Classification Model**:
+1. **Risk Level and Type Classification Model**:
    - Implemented an RNN model with tokenization and GloVe embedding (100-dimensional vector embeddings) for text data.
    - The LSTM layer is used to capture temporal patterns in the data, enabling better classification of risk types.
-   - A dropout layer was incorporated to prevent overfitting, leading to close alignment between training and validation data. (Shown in Graph 2 and Graph 3)
+   - A dropout layer was incorporated to prevent overfitting, leading to close alignment between training and validation data. (Shown in Graph 1 and Graph 2)
    - The model achieved 95% accuracy, demonstrating strong performance across the [dataset](https://kaggle.com/datasets/tarundhamor/cicids-2019-dataset).
 
 <p align="center">
   <img src="assets/ai/risk_level-1.jpg" alt="Risk Level Graph 2">
   <br>
-  Model accuracy over training epochs for both training and validation datasets (Graph 2)
+  Model accuracy over training epochs for both training and validation datasets (Graph 1)
 </p>
 
 <p align="center">
   <img src="assets/ai/risk_level-2.jpg" alt="Risk Level Graph 3">
   <br>
-    Model loss over training epochs for both training and validation datasets (Graph 3)
+    Model loss over training epochs for both training and validation datasets (Graph 2)
+</p>
+
+2. **Network Traffic Classification Model**:
+   - We utilized a pre-trained XGBoost classifier from `scikit-learn` to evaluate network traffic patterns.
+   - The model was optimized for multiclass classification using log loss as the evaluation metric.
+   - Model performance indicates no signs of overfitting, as the training and validation results are closely aligned. (Shown in Graph 3)
+   - Achieved 98% accuracy on both the training set and the new test [dataset](https://kaggle.com/datasets/tarundhamor/cicids-2019-dataset), ensuring robust generalization.
+
+<p align="center">
+  <img src="assets/ai/network.jpg" alt="Network Graph 1">
+  <br>
+  XGBoost Multiclass Log Loss stabilizes over boosting rounds for training and validation datasets (Graph 3)
 </p>
 
 ## Project Vision
