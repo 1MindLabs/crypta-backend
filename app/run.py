@@ -21,10 +21,9 @@ from models.network_traffic.network import predict_network
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=['*'],
-    allow_methods=['*'],
-    allow_headers=['*'],
-    allow_credentials=True
+    allow_origins=['http://localhost:3000', 'https://crypta.vercel.com'],
+    allow_methods=['GET', 'POST'],
+    allow_headers=['Content-Type']
 )
 
 @app.get('/')
